@@ -1,0 +1,17 @@
+# Mac OS
+.DS_Store
+
+# Xcode
+build/
+*.perspectivev3
+*.mode1v3
+*.pbuser
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+
+# Configurações de usuário (O MAIS IMPORTANTE)
+xcuserdata/
