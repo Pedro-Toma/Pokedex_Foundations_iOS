@@ -22,8 +22,9 @@ struct PokemonHeader: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal, 30)
-            
-            AsyncImage(url: pokemonImage, content: { image in
+            let imageUrlString = pokeData.sprites.other.officialArtwork.frontDefault
+            let imageUrl = (URL(string: imageUrlString))
+            AsyncImage(url: imageUrl, content: { image in
                 image
                     .resizable()
                     .scaledToFit()
@@ -52,10 +53,9 @@ struct PokemonHeader: View {
             .sharedBackgroundVisibility(.hidden)
         }
     }
-    
-    private var pokemonImage: URL? {
-        URL(string: pokeData.sprites.other.officialArtwork.frontDefault)
-    }
+//    private var pokemonImage: URL? {
+//        URL(string: pokeData.sprites.other.officialArtwork.frontDefault)
+//    }
 }
 
 #Preview {

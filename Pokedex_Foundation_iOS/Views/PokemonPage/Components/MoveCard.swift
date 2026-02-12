@@ -36,7 +36,7 @@ struct MoveCard: View {
                             if let acc = moveData.accuracy {
                                 Text("ACC: \(acc)%")
                             } else {
-                                Text("-")
+                                Text("ACC: -")
                             }
                         }
                         Spacer()
