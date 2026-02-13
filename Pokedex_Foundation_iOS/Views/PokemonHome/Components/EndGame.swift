@@ -11,13 +11,15 @@ struct EndGame: View {
     
     @Binding var showResult: Bool
     let finalScore: Int
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         if showResult {
             Color.white.opacity(0.5)
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("Final Score: \(finalScore)")
+                    .foregroundColor(.black)
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top, 15)
@@ -34,7 +36,7 @@ struct EndGame: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.primary)
+                                .fill(Color.black)
                         )
                 }
             }

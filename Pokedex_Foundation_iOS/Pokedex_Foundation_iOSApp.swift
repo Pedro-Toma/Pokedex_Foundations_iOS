@@ -15,3 +15,8 @@ struct Pokedex_Foundation_iOSApp: App {
         }
     }
 }
+
+#Preview {
+    TransitionView()
+}
+
