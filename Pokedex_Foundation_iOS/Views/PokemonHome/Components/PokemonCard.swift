@@ -10,8 +10,6 @@ import SwiftUI
 struct PokemonCard: View {
     
     let name: String
-    let id: String
-    let url: String
     
     @State private var pokeData: PokemonData?
     
@@ -27,7 +25,7 @@ struct PokemonCard: View {
                     VStack (alignment: .leading, spacing: 0) {
                         Text(name)
                             .font(.headline)
-                        Text("\(String(format: "#%04d", Int(id) ?? 0))")
+                        Text("\(String(format: "#%04d", Int(pokeData.id)))")
                             .font(.subheadline)
                             .fontWeight(.light)
                     }
@@ -77,5 +75,5 @@ struct PokemonCard: View {
 }
 
 #Preview {
-    PokemonCard(name: "Charizard", id: "6", url: "https://pokeapi.co/api/v2/pokemon/charizard")
+    PokemonCard(name: "charizard")
 }

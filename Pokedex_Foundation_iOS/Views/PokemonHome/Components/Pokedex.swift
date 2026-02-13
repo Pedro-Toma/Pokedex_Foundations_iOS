@@ -41,7 +41,7 @@ struct Pokedex: View {
                        NavigationLink(destination : {
                            PokemonView(pokemonName: pokemon.name)
                        }, label: {
-                           PokemonCard(name: pokemon.name.capitalized, id: pokemon.id, url: pokemon.url)
+                           PokemonCard(name: pokemon.name)
                        })
                        .accentColor(Color.primary)
                    }
