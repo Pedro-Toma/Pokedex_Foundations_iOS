@@ -51,7 +51,7 @@ struct GameOptions: View {
                         .frame(width: 160, height: 60)
                         .overlay(
                             Text(option.name.capitalized)
-                                .foregroundStyle(Color.primary)
+                                .foregroundStyle(Color.black)
                                 .font(.title3)
                                 .fontWeight(.semibold)
                         )

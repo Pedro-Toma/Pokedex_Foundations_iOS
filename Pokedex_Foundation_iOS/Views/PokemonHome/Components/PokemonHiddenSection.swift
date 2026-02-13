@@ -11,6 +11,7 @@ struct PokemonHiddenSection: View {
     
     @State private var pokeData: PokemonData?
     let pokemonName: String
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         Group {
@@ -21,7 +22,7 @@ struct PokemonHiddenSection: View {
                 ZStack {
                     // pokemon frame
                     RoundedRectangle(cornerRadius: 180)
-                        .fill(Color.black)
+                        .fill(colorScheme == .light ? .black : .white)
                         .frame(maxWidth: 320, maxHeight: 320)
                     if let pokeData {
                         let imageUrlString = pokeData.sprites.other.officialArtwork.frontDefault
@@ -32,7 +33,7 @@ struct PokemonHiddenSection: View {
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(Color.white)
+                                .foregroundColor(colorScheme == .light ? .white : .black)
                                 .frame(width: 250, height: 250, alignment: .top)
                             
                         }, placeholder : {

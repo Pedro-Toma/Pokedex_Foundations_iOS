@@ -42,9 +42,6 @@ struct MovesSection: View {
             }
             .padding(.horizontal, 10)
             .listStyle(.plain)
-            .background(
-                Color.white
-            )
         }
     }
 }

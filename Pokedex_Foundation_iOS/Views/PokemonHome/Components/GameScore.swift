@@ -11,11 +11,12 @@ struct GameScore: View {
     
     let highScore: Int
     let score: Int
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         HStack {
             Text("High Score: \(highScore)")
-                .foregroundColor(Color.white)
+                .foregroundColor(colorScheme == .light ? .white : .black)
                 .padding(.vertical, 4)
                 .padding(.horizontal, 18)
                 .background(
@@ -23,7 +24,7 @@ struct GameScore: View {
                 )
             Spacer()
             Text("Score: \(score)")
-                .foregroundColor(Color.white)
+                .foregroundColor(colorScheme == .light ? .white : .black)
                 .padding(.vertical, 4)
                 .padding(.horizontal, 18)
                 .background(
