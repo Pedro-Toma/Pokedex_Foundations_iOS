@@ -12,10 +12,11 @@ struct PokeballButton: View {
     @Binding var buttonColor: Color
     @Binding var isActive: Bool
     @Binding var showHomePage: Bool
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         Rectangle()
-            .fill(Color.black)
+            .fill(colorScheme == .light ? .black : .white)
             .frame(maxWidth: .infinity, maxHeight: 30)
             .offset(y: 20)
         Circle()

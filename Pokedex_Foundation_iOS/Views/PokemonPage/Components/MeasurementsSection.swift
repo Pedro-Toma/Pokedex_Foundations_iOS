@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MeasurementsSection: View {
     
-    var pokeData: PokemonData
+    let pokeData: PokemonData
     
     var body: some View {
         VStack (alignment: .leading, spacing: 10) {

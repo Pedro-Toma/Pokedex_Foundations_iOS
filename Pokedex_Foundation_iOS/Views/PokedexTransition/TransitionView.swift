@@ -10,9 +10,10 @@ import SwiftUI
 struct TransitionView: View {
     
     @State var showHomePage: Bool = false
-    @State private var isActive: Bool = false
-    @State private var buttonColor: Color = .white
-    
+    @State var isActive: Bool = false
+    @State var buttonColor: Color = .white
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         GeometryReader { reader in
             // wait for signal (showHomePage) to go to the home page
@@ -32,6 +33,14 @@ struct TransitionView: View {
                 .frame(maxWidth: .infinity, maxHeight: reader.size.height*0.5)
                 // if button was pressed, red part and button slide to the top of the screen
                 .offset(y: isActive ? -reader.size.height * 0.7 : 0)
+                // change button color based on color scheme when screen loads
+                .onAppear {
+                    buttonColor = (colorScheme == .light ? .white : .black)
+                }
+                // change button color based on color scheme if user changes color scheme
+                .onChange (of: colorScheme) {
+                    buttonColor = (colorScheme == .light ? .white : .black)
+                }
             }
         }
     }

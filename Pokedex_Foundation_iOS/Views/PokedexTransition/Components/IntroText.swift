@@ -10,11 +10,12 @@ import SwiftUI
 struct IntroText: View {
     
     @Binding var isActive: Bool
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         VStack {
             Rectangle()
-                .fill(.red)
+                .fill(colorScheme == .light ? .red : .black)
                 .overlay(
                     VStack {
                         Spacer()

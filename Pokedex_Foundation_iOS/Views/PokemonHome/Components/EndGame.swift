@@ -10,7 +10,7 @@ import SwiftUI
 struct EndGame: View {
     
     @Binding var showResult: Bool
-    @Binding var finalScore: Int
+    let finalScore: Int
     
     var body: some View {
         if showResult {

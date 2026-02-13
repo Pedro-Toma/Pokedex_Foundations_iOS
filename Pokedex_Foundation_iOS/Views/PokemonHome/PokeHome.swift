@@ -10,10 +10,10 @@ import SwiftUI
 struct PokeHome: View {
     
     @State var pokeList: PokemonList?
-    @State private var correctPokemon: Pokemon?
-    @State private var score: Int = 0
-    @State private var finalScore: Int = 0
-    @State private var showResult: Bool = false
+    @State var correctPokemon: Pokemon?
+    @State var score: Int = 0
+    @State var finalScore: Int = 0
+    @State var showResult: Bool = false
     @AppStorage("high_score") private var highScore: Int = 0
     
     var body: some View {
@@ -59,7 +59,7 @@ struct PokeHome: View {
                 }
                 // game results
                 .overlay(
-                    EndGame(showResult: $showResult, finalScore: $finalScore)
+                    EndGame(showResult: $showResult, finalScore: finalScore)
                 )
             }
         }

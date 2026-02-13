@@ -9,14 +9,10 @@ import SwiftUI
 
 struct PokemonView: View {
     
-    // MARK: PROPERTIES
-    
     let pokemonName: String
     @State private var pokeData: PokemonData?
     @State var selectedPage: Int = 0
     @Environment(\.colorScheme) var colorScheme
-    
-    // MARK: BODY
     
     var body: some View {
         
