@@ -19,7 +19,7 @@ struct PokeHome: View {
     var body: some View {
         TabView {
             // pokedex tab
-            Tab ("Home", systemImage: "house.fill") {
+            Tab ("Pokedex", systemImage: "house.fill") {
                 if let pokeList {
                     Pokedex(pokeList: pokeList)
                 } else {

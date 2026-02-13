@@ -39,6 +39,7 @@ struct GameOptions: View {
                             if score > highScore {
                                 highScore = score
                             }
+                            pokemonPool = []
                             finalScore = score
                             score = 0
                             showResult = true

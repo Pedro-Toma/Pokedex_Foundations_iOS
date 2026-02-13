@@ -45,7 +45,7 @@ struct PokemonHiddenSection: View {
                         })
                     } else {
                         Circle()
-                            .fill(Color.gray.opacity(0.3))
+                            .fill(Color.white.opacity(0.5))
                             .frame(width: 300, height: 300, alignment: .top)
                             .redacted(reason: .placeholder)
                             .overlay(ProgressView())
