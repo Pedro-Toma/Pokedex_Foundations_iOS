@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// return custom text and icons for measurement type
 enum MeasurementType {
     
     case weight

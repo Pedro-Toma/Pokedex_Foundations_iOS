@@ -16,12 +16,14 @@ struct PokemonHeader: View {
     
     var body: some View {
         VStack {
+            // pokemon id
             Text("\(String(format: "#%04d", pokemonId))")
                 .font(.title)
                 .foregroundStyle(Color.white)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal, 30)
+            // pokemon image
             let imageUrlString = pokeData.sprites.other.officialArtwork.frontDefault
             let imageUrl = (URL(string: imageUrlString))
             AsyncImage(url: imageUrl, content: { image in
@@ -30,19 +32,16 @@ struct PokemonHeader: View {
                     .scaledToFit()
                     .frame(width: 270, height: 270, alignment: .top)
             }, placeholder : {
-                ProgressView()
+                Rectangle()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(width: 270, height: 270, alignment: .top)
+                    .redacted(reason: .placeholder)
+                    .overlay(ProgressView())
             })
             Spacer()
         }
+        // pokemon name (topTrailing)
         .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Image(systemName: "arrow.left")
-//                    .font(.title)
-//                    .foregroundStyle(Color.white)
-//                    .padding(.leading, 10)
-//                    .padding(.vertical, 100)
-//            }
-//            .sharedBackgroundVisibility(.hidden)
             ToolbarItem(placement: .navigationBarTrailing) {
                 Text(pokemonName)
                     .font(.largeTitle)
@@ -53,9 +52,6 @@ struct PokemonHeader: View {
             .sharedBackgroundVisibility(.hidden)
         }
     }
-//    private var pokemonImage: URL? {
-//        URL(string: pokeData.sprites.other.officialArtwork.frontDefault)
-//    }
 }
 
 #Preview {

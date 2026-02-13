@@ -32,13 +32,11 @@ struct PokemonData: Codable {
     let moves: [Move]
 }
 
-// Pegar todos os tipos
 struct TypeSlot: Codable {
     let slot: Int
     let type: TypeDetail
 }
 
-// Pegar o nome e url de um tipo
 struct TypeDetail: Codable {
     let name: String
 }
@@ -50,6 +48,7 @@ struct Sprites: Codable {
 struct OtherSprites: Codable {
     let officialArtwork: OfficialArtwork
     
+    // resolve problem with item in JSON not in snake case
     enum CodingKeys: String, CodingKey {
         case officialArtwork = "official-artwork"
     }
@@ -68,6 +67,7 @@ struct StatName: Codable {
     let name: String
 }
 
+// Moves Info
 struct Move: Codable {
     let move: MoveBasicInfo
     let versionGroupDetails: [MoveVersion]
@@ -86,6 +86,7 @@ struct GameVersion: Codable {
     let name: String
 }
 
+// Moves Specific Info (new url)
 struct MoveData: Codable {
     let name: String
     let power: Int?

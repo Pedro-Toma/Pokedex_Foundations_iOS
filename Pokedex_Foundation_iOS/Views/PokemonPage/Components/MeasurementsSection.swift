@@ -16,8 +16,6 @@ struct MeasurementsSection: View {
             MeasurementAttributes(type: .weight, value: CGFloat(pokeData.weight)/10)
             MeasurementAttributes(type: .height, value: CGFloat(pokeData.height)/10)
         }
-        //.padding(.vertical, 30)
-
     }
 }
 

@@ -18,13 +18,17 @@ struct StatBar: View {
     
     var body: some View {
         HStack (alignment: .bottom, spacing: 15) {
+            // text info
             Text("\(statName)")
             Text("\(statValue)")
+            // bar
             ZStack (alignment: .leading){
+                // gray bar indicator
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.gray.opacity(0.3))
                     .frame(width: 200, height: 20)
                 RoundedRectangle(cornerRadius: 20)
+                    // whole gradient bar
                     .fill(
                         LinearGradient(
                             colors: [Color("\(pokeData.types.first!.type.name)DarkColor"), Color("\(pokeData.types.first!.type.name)Color")],
@@ -33,6 +37,7 @@ struct StatBar: View {
                         )
                     )
                     .frame(width: 200, height: 20)
+                    // align selected part to the leading edge
                     .mask(
                         RoundedRectangle(cornerRadius: 20)
                             .frame(width: CGFloat(statValue)/CGFloat(maxValue)*200, height: 20)

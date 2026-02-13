@@ -21,6 +21,7 @@ struct InfoCard: View {
             VStack (alignment: .center){
                 TabsSection(pokemonColor: pokemonColor, selectedPage: $selectedPage)
                 TabView (selection: $selectedPage){
+                    // stats Page
                     VStack (alignment: .center) {
                         HStack (spacing: 60){
                             TypesSection(pokeData: pokeData, pokemonColor: pokemonColor)
@@ -29,6 +30,7 @@ struct InfoCard: View {
                         StatsSection(pokeData: pokeData, pokemonColor: pokemonColor)
                     }
                     .tag(0)
+                    // moves Page
                     VStack (alignment: .center) {
                         MovesSection(pokeData: pokeData)
                     }
@@ -52,20 +54,4 @@ struct InfoCard: View {
 
 #Preview {
     PokemonView(pokemonName: "Charizard")
-    
 }
-
-//#Preview {
-//    TabView {
-//        Tab ("qualquer coisa", systemImage: "cat"){
-//            RoundedRectangle(cornerRadius: 12)
-//                .foregroundStyle(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
-//                .padding()
-//        }
-//        
-//        Tab ("qualquer cois", systemImage: "dog"){
-//            Color.blue
-//                .ignoresSafeArea()
-//        }
-//    }
-//}

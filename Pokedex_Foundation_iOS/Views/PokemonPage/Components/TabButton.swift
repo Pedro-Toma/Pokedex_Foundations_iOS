@@ -16,6 +16,7 @@ struct TabButton: View {
     
     var body: some View {
         let isActive = (selectedPage == index)
+        // change text and rectangle visibility based on selected page
         VStack(spacing: 4) {
             Text(title)
                 .foregroundColor(isActive ? .primary : .secondary)
@@ -26,6 +27,7 @@ struct TabButton: View {
                 .opacity(isActive ? 1 : 0)
         }
         .font(.headline)
+        // change page with tap gesture
         .onTapGesture {
             selectedPage = index
         }

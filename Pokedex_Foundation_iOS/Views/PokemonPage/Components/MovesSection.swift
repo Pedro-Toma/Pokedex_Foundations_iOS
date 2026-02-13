@@ -23,10 +23,14 @@ struct MovesSection: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 15)
                 .padding(.horizontal, 30)
+            // list of all moves from a specific pokemon
             List {
                 ForEach(pokeData.moves, id:\.move.url) { moveIndex in
                     
+                    // get level which the pokemon learned the move
+                    // from the first game version in the list
                     let level = moveIndex.versionGroupDetails.first?.levelLearnedAt ?? 0
+                    // get move url for more information
                     let url = moveIndex.move.url
                     
                     MoveCard(

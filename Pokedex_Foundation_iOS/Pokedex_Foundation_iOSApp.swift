@@ -11,7 +11,7 @@ import SwiftUI
 struct Pokedex_Foundation_iOSApp: App {
     var body: some Scene {
         WindowGroup {
-            PokemonView(pokemonName: "charizard")
+            TransitionView()
         }
     }
 }

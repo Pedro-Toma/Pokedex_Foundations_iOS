@@ -18,10 +18,12 @@ struct PokemonCard: View {
     var body: some View {
         Group {
             if let pokeData {
+                // pokemon background color - first type
                 let pokemonColor = pokeData.types.first != nil ?
-                        Color("\(pokeData.types.first!.type.name)Color") :
-                        Color.primary
+                Color("\(pokeData.types.first!.type.name)Color") :
+                Color.primary
                 VStack (spacing: 0){
+                    // name and id
                     VStack (alignment: .leading, spacing: 0) {
                         Text(name)
                             .font(.headline)
@@ -32,15 +34,21 @@ struct PokemonCard: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     let imageUrlString = pokeData.sprites.other.officialArtwork.frontDefault
                     let imageUrl = (URL(string: imageUrlString))
+                    // image
                     AsyncImage(url: imageUrl, content: { image in
                         image
                             .resizable()
                             .scaledToFit()
                             .frame(width: 130, height: 130, alignment: .top)
                     }, placeholder : {
-                        ProgressView()
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 130, height: 130, alignment: .top)
+                            .redacted(reason: .placeholder)
+                            .overlay(ProgressView())
                     })
                 }
+                // card frame
                 .padding(18)
                 .frame(width: 180, height: 200)
                 .background(
@@ -49,9 +57,14 @@ struct PokemonCard: View {
                         .stroke(Color.white.opacity(0.5), lineWidth: 8)
                 )
             } else {
-                ProgressView()
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(width: 180, height: 200)
+                    .redacted(reason: .placeholder)
+                    .overlay(ProgressView())
             }
         }
+        // fetch specific pokemon data
         .task {
             do {
                 let fetched = try await PokeAPI.getPokemonData(name: name)
@@ -60,7 +73,7 @@ struct PokemonCard: View {
                 print("Erro ao buscar pokemons", error.localizedDescription)
             }
         }
-    }    
+    }
 }
 
 #Preview {

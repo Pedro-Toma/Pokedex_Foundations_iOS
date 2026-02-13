@@ -17,6 +17,7 @@ struct MoveCard: View {
         Group {
             if let moveData {
                 VStack (spacing: 10) {
+                    // name, icon and damage class
                     HStack {
                         Text(moveData.name.capitalized)
                             .font(.title2)
@@ -31,6 +32,7 @@ struct MoveCard: View {
                         Text(moveData.damageClass.name.capitalized)
                     }
                     HStack {
+                        // level and accuracy
                         VStack (alignment: .leading){
                             Text("Lv. \(levelLearnedAt)")
                             if let acc = moveData.accuracy {
@@ -40,6 +42,7 @@ struct MoveCard: View {
                             }
                         }
                         Spacer()
+                        // power and pp
                         VStack (alignment: .leading) {
                             HStack {
                                 Text("Power ")
@@ -61,6 +64,7 @@ struct MoveCard: View {
                 .frame(maxWidth: .infinity)
                 .background(
                     ZStack {
+                        // rectangle with opacity, stroke and small type indicator
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color("\(moveData.type.name)Color").opacity(0.2))
                             .stroke(Color("\(moveData.type.name)Color"), lineWidth: 2)
@@ -75,10 +79,15 @@ struct MoveCard: View {
                 .cornerRadius(10)
             }
             else {
-                ProgressView()
+                // placeholder
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.gray.opacity(0.1))
+                    .stroke(Color.black.opacity(0.2), lineWidth: 2)
+                    .frame(maxWidth: .infinity, maxHeight: 95)
+                    .overlay(ProgressView())
             }
         }
-        //.frame(maxWidth: .infinity, alignment: .leading)
+        // fetch specific move data
         .task {
             do {
                 let fetched = try await PokeAPI.getMoveData(url: url)

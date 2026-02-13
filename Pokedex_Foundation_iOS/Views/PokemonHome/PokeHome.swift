@@ -9,42 +9,62 @@ import SwiftUI
 
 struct PokeHome: View {
     
-    @State private var pokeList: PokemonList?
-    
-    var columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    @State var pokeList: PokemonList?
+    @State private var correctPokemon: Pokemon?
+    @State private var score: Int = 0
+    @State private var finalScore: Int = 0
+    @State private var showResult: Bool = false
+    @AppStorage("high_score") private var highScore: Int = 0
     
     var body: some View {
         TabView {
+            // pokedex tab
             Tab ("Home", systemImage: "house.fill") {
-                NavigationStack {
-                    if let pokeList {
-                        ScrollView {
-                            LazyVGrid (columns: columns, spacing: 26){
-                                ForEach(pokeList.results) { pokemon in
-                                    NavigationLink(destination : {
-                                        PokemonView(pokemonName: pokemon.name)
-                                    }, label: {
-                                        PokemonCard(name: pokemon.name.capitalized, id: pokemon.id, url: pokemon.url)
-                                    })
-                                    .accentColor(Color.primary)
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                        }
-                        .navigationTitle("Pokédex")
-                    } else {
-                        ProgressView()
-                    }
+                if let pokeList {
+                    Pokedex(pokeList: pokeList)
+                } else {
+                    ProgressView()
                 }
             }
+            // game tab (who`s that pokemon?)
             Tab ("Game", systemImage: "gamecontroller.fill") {
-                Text("Game")
+                VStack {
+                    VStack {
+                        if let correctPokemon {
+                            // title, frame and image
+                            PokemonHiddenSection(pokemonName: correctPokemon.name)
+                                .id(correctPokemon.id)
+                        } else {
+                            // placeholder
+                            Circle()
+                                .frame(width: 200, height: 200)
+                                .redacted(reason: .placeholder)
+                        }
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 400)
+                    .background(
+                        VStack (spacing: 35){
+                            GameBackground()
+                            GameScore(highScore: highScore, score: score)
+                            if let pokeList {
+                                GameOptions(pokeList: pokeList, correctPokemon: $correctPokemon, score: $score, finalScore: $finalScore, showResult: $showResult)
+                            } else {
+                                ProgressView()
+                            }
+                            Spacer()
+                        }
+                        .ignoresSafeArea(.all)
+                    )
+                }
+                // game results
+                .overlay(
+                    EndGame(showResult: $showResult, finalScore: $finalScore)
+                )
             }
         }
         .accentColor(.red)
+        // fetch pokemon list
         .task {
             do {
                 let fetched = try await PokeAPI.getPokemons()
@@ -53,7 +73,9 @@ struct PokeHome: View {
                 print("Erro ao buscar pokemons", error.localizedDescription)
             }
         }
-    }}
+        
+    }
+}
 
 #Preview {
     PokeHome()

@@ -24,24 +24,35 @@ struct PokemonView: View {
             if let pokeData {
                 NavigationStack{
                     ZStack {
-                        // background
+                        // background color
                         let pokemonColor = pokeData.types.first != nil ?
                                 Color("\(pokeData.types.first!.type.name)Color") :
                                 Color.primary
                         pokemonColor.ignoresSafeArea(.all)
                         
-                        // infoCard
                         // pokemon stats information
                         InfoCard(pokeData: pokeData, pokemonColor: pokemonColor, selectedPage: $selectedPage)
                         
-                        // header
+                        // name, id and image
                         PokemonHeader(pokemonId: pokeData.id, pokemonName: pokeData.name.capitalized, pokeData: pokeData)
                     }
                 }
             } else {
-                ProgressView()
+                // placeholder
+                VStack{
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(maxWidth: .infinity, maxHeight: 480)
+                        .overlay(ProgressView())
+                }
+                .ignoresSafeArea(.all)
+                .background(
+                    Color.gray.opacity(0.2).ignoresSafeArea(.all)
+                )
             }
         }
+        // fetch specific pokemon data
         .task {
             do {
                 let fetched = try await PokeAPI.getPokemonData(name: pokemonName)
